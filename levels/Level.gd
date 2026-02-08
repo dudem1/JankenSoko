@@ -34,6 +34,22 @@ func undo():
 	for path in state.keys():
 		if has_node(path):
 			var obj = get_node(path)
-			obj.position = state[path]["position"]
+
 			if state[path]["visible"] and obj.has_method("activate"):
 				obj.activate()
+
+			var target_pos = state[path]["position"]
+
+			if obj.position == target_pos: continue
+
+			obj.tween.kill()
+			obj.tween = null
+			obj.tween = obj.create_tween()
+			obj.tween.set_trans(Tween.TRANS_SINE)
+			obj.tween.set_ease(Tween.EASE_IN_OUT)
+			obj.tween.tween_property(
+				obj,
+				"position",
+				target_pos,
+				1.0 / Global.speed
+			)

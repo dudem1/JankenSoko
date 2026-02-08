@@ -9,8 +9,13 @@ var inputs = {
 }
 var speed = 7
 
+func _ready():
+	OS.set_window_position(Vector2(200, 50))
+
 func move_tween(node: Node2D, tween: SceneTreeTween, dir) -> SceneTreeTween:
-	if tween: tween.kill()
+	if tween:
+		tween.kill()
+		tween = null
 
 	tween = node.create_tween()
 	tween.set_trans(Tween.TRANS_SINE)

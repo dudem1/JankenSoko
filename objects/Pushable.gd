@@ -13,12 +13,19 @@ func push(dir):
 	var collider = ray.get_collider()
 
 	if collider.is_in_group("pushable") and resolve_rps(self, collider):
-		collider.visible = false
-		collider.set_deferred("monitoring", false)
+		collider.deactivate()
 		tween = Global.move_tween(self, tween, dir)
 		return true
 
 	return false
+
+func activate():
+	visible = true
+	$CollisionShape2D.set_deferred("disabled", false)
+
+func deactivate():
+	visible = false
+	$CollisionShape2D.set_deferred("disabled", true)
 
 # Returns true if attacker defeats defender by rock-paper-scissors rules.
 func resolve_rps(attacker, defender) -> bool:

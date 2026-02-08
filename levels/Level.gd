@@ -1,5 +1,6 @@
 extends Node2D
 
+const MAX_HISTORY = 100
 var history = []
 
 func save_state():
@@ -13,6 +14,8 @@ func save_state():
 
 	if history.empty() or is_state_different(history[history.size() - 1], state):
 		history.append(state)
+
+		if history.size() > MAX_HISTORY: history.pop_front()
 
 func is_state_different(state_a: Dictionary, state_b: Dictionary) -> bool:
 	if state_a.keys() != state_b.keys():

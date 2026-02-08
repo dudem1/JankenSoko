@@ -1,6 +1,18 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://gui/Gui.gd" type="Script" id=1]
+
+[sub_resource type="InputEventAction" id=1]
+action = "ui_restart"
+
+[sub_resource type="ShortCut" id=2]
+shortcut = SubResource( 1 )
+
+[sub_resource type="InputEventAction" id=3]
+action = "ui_undo"
+
+[sub_resource type="ShortCut" id=4]
+shortcut = SubResource( 3 )
 
 [node name="Gui" type="Control"]
 anchor_right = 1.0
@@ -11,6 +23,7 @@ script = ExtResource( 1 )
 margin_top = 640.0
 margin_right = 80.0
 margin_bottom = 720.0
+shortcut = SubResource( 2 )
 text = "Restart"
 
 [node name="Undo" type="Button" parent="."]
@@ -18,6 +31,7 @@ margin_left = 80.0
 margin_top = 640.0
 margin_right = 160.0
 margin_bottom = 720.0
+shortcut = SubResource( 4 )
 text = "Undo"
 
 [connection signal="pressed" from="Restart" to="." method="_on_Restart_pressed"]

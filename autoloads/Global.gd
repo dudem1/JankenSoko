@@ -12,6 +12,11 @@ var speed = 7
 func _ready():
 	OS.set_window_position(Vector2(200, 50))
 
+func _unhandled_input(event):
+	if event is InputEventKey and event.pressed and not event.echo:
+		if event.scancode == KEY_ESCAPE:
+			get_tree().quit()
+
 func move_tween(node: Node2D, tween: SceneTreeTween, dir) -> SceneTreeTween:
 	if tween:
 		tween.kill()

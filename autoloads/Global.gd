@@ -23,8 +23,8 @@ func move_tween(node: Node2D, tween: SceneTreeTween, dir) -> SceneTreeTween:
 		tween = null
 
 	tween = node.create_tween()
-	tween.set_trans(Tween.TRANS_SINE)
-	tween.set_ease(Tween.EASE_IN_OUT)
+	tween.set_trans(Tween.TRANS_CUBIC)
+	tween.set_ease(Tween.EASE_OUT)
 
 	tween.tween_property(
 		node,

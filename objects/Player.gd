@@ -4,19 +4,19 @@ var tween: SceneTreeTween
 onready var ray = $RayCast2D
 onready var level = $"../.."
 
-# --- SWIPE ---
+# swipe
 var swipe_start = null
 var minimum_drag = Global.tile_size * 0.3
 
 func _unhandled_input(event):
 	if tween and tween.is_running(): return
 
-	# Keyboard
+	# keyboard
 	for dir in Global.inputs.keys():
 		if event.is_action_pressed(dir):
 			move(dir)
 
-	# Swipe
+	# swipe
 	if event is InputEventScreenTouch:
 		if event.pressed:
 			swipe_start = event.position

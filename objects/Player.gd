@@ -29,10 +29,10 @@ func move(dir):
 	ray.cast_to = Global.inputs[dir] * Global.tile_size
 	ray.force_raycast_update()
 
-	level.save_state()
-
 	if !ray.is_colliding():
 		tween = Global.move_tween(self, tween, dir)
+		level.save_state()
+		level.change_step(1)
 		return
 
 	var collider = ray.get_collider()
@@ -40,6 +40,8 @@ func move(dir):
 	if collider.is_in_group("pushable"):
 		if collider.push(dir):
 			tween = Global.move_tween(self, tween, dir)
+			level.save_state()
+			level.change_step(1)
 		return
 
 func calculate_swipe(swipe_end: Vector2):

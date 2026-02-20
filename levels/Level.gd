@@ -2,6 +2,15 @@ extends Node2D
 
 const MAX_HISTORY = 100
 var history = []
+var steps : int = 0
+onready var steps_label = $Gui/Steps
+
+func change_step(amount: int):
+	steps += amount
+
+	if steps < 0: steps = 0
+
+	steps_label.bbcode_text = "[center][color=#000]\nSteps:\n" + str(steps) + "[/color][/center]"
 
 func save_state():
 	var state = {}
@@ -33,6 +42,8 @@ func undo():
 	if history.empty(): return
 
 	var state = history.pop_back()
+
+	change_step(-1)
 
 	for path in state.keys():
 		if has_node(path):

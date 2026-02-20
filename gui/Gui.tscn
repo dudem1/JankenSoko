@@ -23,6 +23,7 @@ script = ExtResource( 1 )
 margin_top = 640.0
 margin_right = 80.0
 margin_bottom = 720.0
+focus_mode = 0
 shortcut = SubResource( 2 )
 text = "Restart"
 
@@ -31,8 +32,22 @@ margin_left = 80.0
 margin_top = 640.0
 margin_right = 160.0
 margin_bottom = 720.0
+focus_mode = 0
 shortcut = SubResource( 4 )
 text = "Undo"
+
+[node name="Steps" type="RichTextLabel" parent="."]
+margin_left = 160.0
+margin_top = 640.0
+margin_right = 240.0
+margin_bottom = 720.0
+bbcode_enabled = true
+bbcode_text = "[center][color=#000]
+Steps:
+0[/color][/center]"
+text = "
+Steps:
+0"
 
 [connection signal="pressed" from="Restart" to="." method="_on_Restart_pressed"]
 [connection signal="pressed" from="Undo" to="." method="_on_Undo_pressed"]

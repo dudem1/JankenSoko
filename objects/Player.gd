@@ -30,6 +30,8 @@ func move(dir):
 	ray.force_raycast_update()
 
 	if !ray.is_colliding():
+		if !level.is_walkable_position(position + ray.cast_to): return
+
 		tween = Global.move_tween(self, tween, dir)
 		level.save_state()
 		level.change_step(1)

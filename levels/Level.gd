@@ -67,3 +67,7 @@ func undo():
 				target_pos,
 				1.0 / Global.speed
 			)
+
+func is_walkable_position(world_position: Vector2) -> bool:
+	var tile = $Map.get_cellv($Map.world_to_map(world_position))
+	return tile == 1

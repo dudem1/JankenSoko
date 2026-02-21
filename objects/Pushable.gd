@@ -2,11 +2,14 @@ extends Area2D
 
 var tween: SceneTreeTween
 onready var ray = $RayCast2D
+onready var level = $"../.."
 
 func push(dir):
 	ray.cast_to = Global.inputs[dir] * Global.tile_size
 	ray.force_raycast_update()
 	if !ray.is_colliding():
+		if !level.is_walkable_position(position + ray.cast_to): return
+
 		tween = Global.move_tween(self, tween, dir)
 		return true
 

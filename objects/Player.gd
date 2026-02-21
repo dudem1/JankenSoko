@@ -9,6 +9,9 @@ onready var level = $"../.."
 var swipe_start = null
 var minimum_drag = Global.tile_size * 0.3
 
+func _ready():
+	animation_player.playback_speed = Global.speed
+
 func _unhandled_input(event):
 	if tween and tween.is_running(): return
 
@@ -30,12 +33,13 @@ func move(dir):
 	ray.cast_to = Global.inputs[dir] * Global.tile_size
 	ray.force_raycast_update()
 
+	level.save_state()
+
 	if !ray.is_colliding():
 		if !level.is_walkable_position(position + ray.cast_to): return
 
 		tween = Global.move_tween(self, tween, dir)
 		animation_player.play("move")
-		level.save_state()
 		level.change_step(1)
 		return
 
@@ -45,7 +49,6 @@ func move(dir):
 		if collider.push(dir):
 			tween = Global.move_tween(self, tween, dir)
 			animation_player.play("move")
-			level.save_state()
 			level.change_step(1)
 		return
 

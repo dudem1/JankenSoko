@@ -2,6 +2,7 @@ extends Area2D
 
 var tween: SceneTreeTween
 onready var ray = $RayCast2D
+onready var animation_player = $AnimationPlayer
 onready var level = $"../.."
 
 # swipe
@@ -33,6 +34,7 @@ func move(dir):
 		if !level.is_walkable_position(position + ray.cast_to): return
 
 		tween = Global.move_tween(self, tween, dir)
+		animation_player.play("move")
 		level.save_state()
 		level.change_step(1)
 		return
@@ -42,6 +44,7 @@ func move(dir):
 	if collider.is_in_group("pushable"):
 		if collider.push(dir):
 			tween = Global.move_tween(self, tween, dir)
+			animation_player.play("move")
 			level.save_state()
 			level.change_step(1)
 		return

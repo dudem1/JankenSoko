@@ -1,10 +1,10 @@
 extends Area2D
 
 var tween: SceneTreeTween
-var can_move: bool = true
+var can_move: bool = false
 onready var ray = $RayCast2D
 onready var animation_player = $AnimationPlayer
-onready var level = $"../.."
+onready var level = $"../../.."
 
 # swipe
 var swipe_start = null
@@ -14,6 +14,8 @@ func _ready():
 	animation_player.playback_speed = Global.speed
 
 func _unhandled_input(event):
+	if !can_move: return
+
 	if tween and tween.is_running(): return
 
 	# keyboard

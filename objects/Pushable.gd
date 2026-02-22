@@ -2,7 +2,7 @@ extends Area2D
 
 var tween: SceneTreeTween
 onready var ray = $RayCast2D
-onready var level = $"../.."
+onready var level = $"../../.."
 
 func push(dir):
 	ray.cast_to = Global.inputs[dir] * Global.tile_size

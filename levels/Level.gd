@@ -4,6 +4,9 @@ const MAX_HISTORY = 100
 var history = []
 var steps: int = 0
 onready var steps_label = $Gui/Steps
+onready var objects = $Contain/Objects
+onready var player = $Contain/Objects/Player
+onready var map = $Contain/Map
 
 func change_step(amount: int):
 	steps += amount
@@ -15,7 +18,7 @@ func change_step(amount: int):
 func save_state():
 	var state = {}
 
-	for obj in $Objects.get_children():
+	for obj in objects.get_children():
 		state[obj.get_path()] = {
 			"position": obj.position,
 			"visible": obj.visible
@@ -69,5 +72,8 @@ func undo():
 			)
 
 func is_walkable_position(world_position: Vector2) -> bool:
-	var tile = $Map.get_cellv($Map.world_to_map(world_position))
+	var tile = map.get_cellv(map.world_to_map(world_position))
 	return tile == 1
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	player.can_move = true

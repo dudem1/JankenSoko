@@ -1,6 +1,7 @@
 extends Area2D
 
 var tween: SceneTreeTween
+var can_move: bool = true
 onready var ray = $RayCast2D
 onready var animation_player = $AnimationPlayer
 onready var level = $"../.."

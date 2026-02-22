@@ -2,7 +2,7 @@ extends Node2D
 
 const MAX_HISTORY = 100
 var history = []
-var steps : int = 0
+var steps: int = 0
 onready var steps_label = $Gui/Steps
 
 func change_step(amount: int):

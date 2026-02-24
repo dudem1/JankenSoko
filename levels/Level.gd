@@ -53,7 +53,7 @@ func undo():
 		if has_node(path):
 			var obj = get_node(path)
 
-			if obj.has_method("activate") and state[path]["active"] and obj.active == false:
+			if obj.has_method("activate") and state[path]["active"] and !obj.active:
 				obj.activate()
 
 			var target_pos = state[path]["position"]

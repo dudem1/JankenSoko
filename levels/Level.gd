@@ -2,14 +2,29 @@ extends Node2D
 
 const MAX_HISTORY = 100
 var history = []
+var steps: int = 0
+onready var steps_label = $Gui/Steps
+onready var objects = $Contain/Objects
+onready var player = $Contain/Objects/Player
+onready var map = $Contain/Map
+
+func change_step(amount: int):
+	steps += amount
+
+	if steps < 0: steps = 0
+
+	steps_label.bbcode_text = "[center][color=#000]\nSteps:\n" + str(steps) + "[/color][/center]"
 
 func save_state():
 	var state = {}
+	var active = true
 
-	for obj in $Objects.get_children():
+	for obj in objects.get_children():
+		if obj.has_method("activate"): active = obj.active
+
 		state[obj.get_path()] = {
 			"position": obj.position,
-			"visible": obj.visible
+			"active": active
 		}
 
 	if history.empty() or is_state_different(history[history.size() - 1], state):
@@ -22,10 +37,8 @@ func is_state_different(state_a: Dictionary, state_b: Dictionary) -> bool:
 		return true
 
 	for path in state_a.keys():
-		if state_a[path]["position"] != state_b[path]["position"]:
-			return true
-		if state_a[path]["visible"] != state_b[path]["visible"]:
-			return true
+		if state_a[path]["position"] != state_b[path]["position"]: return true
+		if state_a[path]["active"] != state_b[path]["active"]: return true
 
 	return false
 
@@ -34,11 +47,13 @@ func undo():
 
 	var state = history.pop_back()
 
+	change_step(-1)
+
 	for path in state.keys():
 		if has_node(path):
 			var obj = get_node(path)
 
-			if state[path]["visible"] and obj.has_method("activate"):
+			if obj.has_method("activate") and state[path]["active"] and obj.active == false:
 				obj.activate()
 
 			var target_pos = state[path]["position"]
@@ -56,3 +71,13 @@ func undo():
 				target_pos,
 				1.0 / Global.speed
 			)
+
+func is_walkable_position(world_position: Vector2) -> bool:
+	var tile = map.get_cellv(map.world_to_map(world_position))
+	return tile == 1
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	match anim_name:
+		"start_level": player.can_move = true
+		"restart_level": get_tree().reload_current_scene()
+		"end_level": pass

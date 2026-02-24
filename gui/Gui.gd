@@ -1,10 +1,12 @@
 extends Control
 
 onready var level = $".."
-onready var player = level.get_node("Objects/Player")
+onready var player = $"../Contain/Objects/Player"
+onready var animation_player = $"../AnimationPlayer"
 
 func _on_Restart_pressed():
-	get_tree().reload_current_scene()
+	player.can_move = false
+	animation_player.play("restart_level")
 
 func _on_Undo_pressed():
 	if level.history.empty(): return

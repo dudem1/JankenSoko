@@ -7,18 +7,23 @@ onready var animation_player = $AnimationPlayer
 onready var ray = $RayCast2D
 onready var level = $"../../.."
 
+func _ready():
+	animation_player.playback_speed = Global.speed
+
 func push(dir):
 	ray.cast_to = Global.inputs[dir] * Global.tile_size
 	ray.force_raycast_update()
 	if !ray.is_colliding():
 		if !level.is_walkable_position(position + ray.cast_to): return
 
+		level.save_state()
 		tween = Global.move_tween(self, tween, dir)
 		return true
 
 	var collider = ray.get_collider()
 
 	if collider.is_in_group("pushable") and resolve_rps(self, collider):
+		level.save_state()
 		collider.deactivate()
 		tween = Global.move_tween(self, tween, dir)
 		return true

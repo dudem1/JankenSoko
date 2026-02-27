@@ -33,17 +33,23 @@ func _unhandled_input(event):
 				swipe_start = null
 
 func move(dir):
+	if animation_player.is_playing():
+		animation_player.stop()
+		animation_player.seek(0, true)
+
 	ray.cast_to = Global.inputs[dir] * Global.tile_size
 	ray.force_raycast_update()
 
-	level.save_state()
+	if ray.is_colliding():
+		animation_player.play("shake")
+	else:
+		if !level.is_walkable_position(position + ray.cast_to):
+			animation_player.play("shake")
+			return
 
-	if !ray.is_colliding():
-		if !level.is_walkable_position(position + ray.cast_to): return
-
+		level.save_state()
 		tween = Global.move_tween(self, tween, dir)
 		animation_player.play("move")
-		level.change_step(1)
 		return
 
 	var collider = ray.get_collider()
@@ -52,8 +58,9 @@ func move(dir):
 		if collider.push(dir):
 			tween = Global.move_tween(self, tween, dir)
 			animation_player.play("move")
-			level.change_step(1)
-		return
+		else:
+			animation_player.play("shake")
+			return
 
 func calculate_swipe(swipe_end: Vector2):
 	if swipe_start == null: return

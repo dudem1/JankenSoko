@@ -1,19 +1,22 @@
 extends Node2D
 
-const MAX_HISTORY = 100
+const MAX_HISTORY = 1000
 var history = []
-var steps: int = 0
-onready var steps_label = $Gui/Steps
+onready var steps_label = $Gui/Steps/Label
+onready var steps_animation_player = $Gui/Steps/AnimationPlayer
 onready var objects = $Contain/Objects
 onready var player = $Contain/Objects/Player
 onready var map = $Contain/Map
 
-func change_step(amount: int):
-	steps += amount
+func change_steps():
+	var steps = history.size()
 
-	if steps < 0: steps = 0
+	if steps > 999:
+		steps_label.text = "999+"
+	else:
+		steps_label.text = str(steps)
 
-	steps_label.bbcode_text = "[center][color=#000]\nSteps:\n" + str(steps) + "[/color][/center]"
+	steps_animation_player.play("change")
 
 func save_state():
 	var state = {}
@@ -27,33 +30,24 @@ func save_state():
 			"active": active
 		}
 
-	if history.empty() or is_state_different(history[history.size() - 1], state):
-		history.append(state)
+	history.append(state)
 
-		if history.size() > MAX_HISTORY: history.pop_front()
+	if history.size() > MAX_HISTORY: history.pop_front()
 
-func is_state_different(state_a: Dictionary, state_b: Dictionary) -> bool:
-	if state_a.keys() != state_b.keys():
-		return true
-
-	for path in state_a.keys():
-		if state_a[path]["position"] != state_b[path]["position"]: return true
-		if state_a[path]["active"] != state_b[path]["active"]: return true
-
-	return false
+	change_steps()
 
 func undo():
 	if history.empty(): return
 
 	var state = history.pop_back()
 
-	change_step(-1)
+	change_steps()
 
 	for path in state.keys():
 		if has_node(path):
 			var obj = get_node(path)
 
-			if obj.has_method("activate") and state[path]["active"] and !obj.active:
+			if obj.has_method("activate") and !obj.active and state[path]["active"]:
 				obj.activate()
 
 			var target_pos = state[path]["position"]

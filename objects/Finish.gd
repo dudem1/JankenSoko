@@ -5,4 +5,8 @@ func _ready():
 
 func _on_area_entered(area):
 	if area.is_in_group("player"):
+		var player = area
+
+		player.can_move = false
+
 		print("game over")

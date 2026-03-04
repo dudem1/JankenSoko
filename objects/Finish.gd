@@ -1,8 +1,17 @@
 extends Area2D
 
-func _ready():
-	connect("area_entered", self, "_on_area_entered")
+onready var finish_sound = $FinishSound
+onready var finish_panel = $"../../../Gui/FinishPanel"
 
-func _on_area_entered(area):
+func _ready():
+	finish_sound.pitch_scale = Global.adjust_pitch(finish_sound)
+
+func _on_Finish_area_entered(area):
 	if area.is_in_group("player"):
-		print("game over")
+		var player = area
+
+		player.can_move = false
+		
+		finish_sound.play()
+		
+		finish_panel.visible = 1

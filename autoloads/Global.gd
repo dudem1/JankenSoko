@@ -13,7 +13,7 @@ func _ready():
 	OS.set_window_position(Vector2(200, 50))
 
 func _unhandled_input(event):
-	if event is InputEventKey and event.pressed and not event.echo:
+	if event is InputEventKey and event.pressed and !event.echo:
 		if event.scancode == KEY_ESCAPE:
 			get_tree().quit()
 
@@ -34,3 +34,6 @@ func move_tween(node: Node2D, tween: SceneTreeTween, dir) -> SceneTreeTween:
 	)
 
 	return tween
+
+func adjust_pitch(audio: AudioStreamPlayer) -> float:
+	return clamp(audio.stream.get_length() * speed, 0.1, 20.0)

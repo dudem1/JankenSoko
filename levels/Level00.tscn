@@ -1,0 +1,185 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://objects/Map.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/fonts/ANUDI___.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://levels/Level.gd" type="Script" id=3]
+[ext_resource path="res://objects/Finish.tscn" type="PackedScene" id=4]
+[ext_resource path="res://objects/Player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://gui/Gui.tscn" type="PackedScene" id=8]
+
+[sub_resource type="DynamicFont" id=4]
+size = 90
+font_data = ExtResource( 2 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "end_level"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Contain:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -360 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Contain:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "intro"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Intro:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 2, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "restart_level"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Contain:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=1]
+resource_name = "start_level"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Contain:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 360 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Contain:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="Level00" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Contain" type="Node2D" parent="."]
+
+[node name="Map" parent="Contain" instance=ExtResource( 1 )]
+tile_data = PoolIntArray( 65539, 1, 0, 65541, 1, 0, 65543, 1, 0, 65545, 1, 0, 65547, 1, 0, 131075, 1, 0, 131077, 0, 0, 131079, 0, 0, 131081, 0, 0, 131083, 0, 0, 196611, 1, 0, 196612, 1, 0, 196613, 1, 0, 196614, 1, 0, 196615, 1, 0, 196616, 1, 0, 196617, 1, 0, 196618, 1, 0, 196619, 1, 0, 262147, 1, 0, 262148, 1, 0, 262149, 1, 0, 262150, 1, 0, 262151, 1, 0, 262152, 1, 0, 262153, 1, 0, 262154, 1, 0, 262155, 1, 0, 262156, 0, 0, 262157, 1, 0, 327683, 1, 0, 327684, 1, 0, 327685, 1, 0, 327686, 1, 0, 327687, 1, 0, 327688, 1, 0, 327689, 1, 0, 327690, 1, 0, 327691, 1, 0, 393219, 0, 0, 393221, 0, 0, 393223, 0, 0, 393225, 0, 0, 393227, 0, 0, 458755, 1, 0, 458757, 1, 0, 458759, 1, 0, 458761, 1, 0, 458763, 1, 0 )
+
+[node name="Objects" type="Node2D" parent="Contain"]
+
+[node name="Level01" parent="Contain/Objects" instance=ExtResource( 4 )]
+position = Vector2( 240, 80 )
+
+[node name="Level02" parent="Contain/Objects" instance=ExtResource( 4 )]
+position = Vector2( 240, 560 )
+
+[node name="Level03" parent="Contain/Objects" instance=ExtResource( 4 )]
+position = Vector2( 400, 80 )
+
+[node name="Level04" parent="Contain/Objects" instance=ExtResource( 4 )]
+position = Vector2( 400, 560 )
+
+[node name="Level05" parent="Contain/Objects" instance=ExtResource( 4 )]
+position = Vector2( 560, 80 )
+
+[node name="Level06" parent="Contain/Objects" instance=ExtResource( 4 )]
+position = Vector2( 560, 560 )
+
+[node name="Level07" parent="Contain/Objects" instance=ExtResource( 4 )]
+position = Vector2( 720, 80 )
+
+[node name="Level08" parent="Contain/Objects" instance=ExtResource( 4 )]
+position = Vector2( 720, 560 )
+
+[node name="Level09" parent="Contain/Objects" instance=ExtResource( 4 )]
+position = Vector2( 880, 80 )
+
+[node name="Level10" parent="Contain/Objects" instance=ExtResource( 4 )]
+position = Vector2( 880, 560 )
+
+[node name="Level11" parent="Contain/Objects" instance=ExtResource( 4 )]
+position = Vector2( 1040, 320 )
+
+[node name="Player" parent="Contain/Objects" instance=ExtResource( 5 )]
+position = Vector2( 560, 320 )
+
+[node name="Gui" parent="." instance=ExtResource( 8 )]
+
+[node name="Intro" type="Control" parent="."]
+visible = false
+margin_right = 1280.0
+margin_bottom = 720.0
+
+[node name="ColorRect" type="ColorRect" parent="Intro"]
+margin_right = 1280.0
+margin_bottom = 720.0
+color = Color( 0.905882, 0.890196, 0.858824, 1 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Intro"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -397.5
+margin_top = -50.0
+margin_right = 397.5
+margin_bottom = 50.0
+custom_colors/default_color = Color( 0.454902, 0.768627, 0.898039, 1 )
+custom_fonts/normal_font = SubResource( 4 )
+bbcode_enabled = true
+bbcode_text = "[wave amp=50 freq=5]JankenSoko[/wave]"
+text = "JankenSoko"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "intro"
+anims/end_level = SubResource( 2 )
+anims/intro = SubResource( 5 )
+anims/restart_level = SubResource( 3 )
+anims/start_level = SubResource( 1 )
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

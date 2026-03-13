@@ -9,11 +9,66 @@ var inputs = {
 }
 var speed = 7
 
+const LEVEL_MEDAL_REQUIREMENTS = {
+	"Level01": {"gold": 1, "silver": 2},
+	"Level02": {"gold": 1, "silver": 2},
+	"Level03": {"gold": 1, "silver": 2},
+	"Level04": {"gold": 1, "silver": 2},
+	"Level05": {"gold": 1, "silver": 2},
+	"Level06": {"gold": 1, "silver": 2},
+	"Level07": {"gold": 1, "silver": 2},
+	"Level08": {"gold": 1, "silver": 2},
+	"Level09": {"gold": 1, "silver": 2},
+	"Level10": {"gold": 1, "silver": 2},
+	"Level11": {"gold": 1, "silver": 2}
+}
+var player_steps = {}
+const SAVE_FILE = "user://player_steps.save"
+
 func _ready():
 	OS.set_window_position(Vector2(200, 50))
 
+	load_steps()
+
+	print(player_steps)
+
+func load_steps():
+	var config = ConfigFile.new()
+	var err = config.load(SAVE_FILE)
+
+	if err == OK:
+		for level_name in LEVEL_MEDAL_REQUIREMENTS.keys():
+			player_steps[level_name] = config.get_value("steps", level_name, 0)
+	else:
+		for level_name in LEVEL_MEDAL_REQUIREMENTS.keys():
+			player_steps[level_name] = 0
+
+func save_steps(level_name: String, steps: int) -> void:
+	if player_steps.has(level_name) and steps >= player_steps[level_name] and player_steps[level_name] != 0:
+		return
+
+	player_steps[level_name] = steps
+
+	var config = ConfigFile.new()
+	for lname in player_steps.keys():
+		config.set_value("steps", lname, player_steps[lname])
+
+	var err = config.save(SAVE_FILE)
+	if err != OK: print("Error: ", err)
+
+func get_medal(level_name: String) -> String:
+	var steps = player_steps.get(level_name, 0)
+
+	if steps == 0: return "none"
+
+	var req = LEVEL_MEDAL_REQUIREMENTS[level_name]
+
+	if steps <= req.gold: return "gold"
+	elif steps <= req.silver: return "silver"
+	else: return "bronze"
+
 func _unhandled_input(event):
-	if event is InputEventKey and event.pressed and not event.echo:
+	if event is InputEventKey and event.pressed and !event.echo:
 		if event.scancode == KEY_ESCAPE:
 			get_tree().quit()
 
@@ -34,3 +89,6 @@ func move_tween(node: Node2D, tween: SceneTreeTween, dir) -> SceneTreeTween:
 	)
 
 	return tween
+
+func adjust_pitch(audio: AudioStreamPlayer) -> float:
+	return clamp(audio.stream.get_length() * speed, 0.1, 20.0)

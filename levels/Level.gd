@@ -9,6 +9,14 @@ onready var objects = $Contain/Objects
 onready var player = $Contain/Objects/Player
 onready var map = $Contain/Map
 
+func _ready():
+	if self.name == "Level00":
+		for level_name in Global.player_steps:
+			var steps = Global.player_steps[level_name]
+
+			if level_name == "Level11": return
+			if steps > 0: objects.get_node("Lock" + level_name).queue_free()
+
 func change_steps():
 	var steps = history.size()
 

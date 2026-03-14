@@ -30,8 +30,6 @@ func _ready():
 
 	load_steps()
 
-	print(player_steps)
-
 func load_steps():
 	var config = ConfigFile.new()
 	var err = config.load(SAVE_FILE)

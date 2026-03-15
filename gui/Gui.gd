@@ -5,6 +5,7 @@ onready var player = $"../Contain/Objects/Player"
 onready var level_animation_player = $"../AnimationPlayer"
 onready var steps = $Steps
 onready var steps_animation_player = $Steps/AnimationPlayer
+onready var back_button = $Back
 onready var restart_button = $Restart
 onready var undo_button = $Undo
 onready var info_button = $Info
@@ -15,6 +16,7 @@ var button_tweens = {}
 func _ready():
 	if level.name == "Level00":
 		steps.visible = false
+		back_button.queue_free()
 		restart_button.queue_free()
 		undo_button.queue_free()
 
@@ -22,6 +24,7 @@ func _ready():
 
 	click_sound.pitch_scale = Global.adjust_pitch(click_sound)
 
+	_setup_hover(back_button)
 	_setup_hover(restart_button)
 	_setup_hover(undo_button)
 	_setup_hover(info_button)
@@ -81,3 +84,6 @@ func _on_Info_pressed():
 	click_sound.play()
 
 	print("info")
+
+func _on_Back_pressed():
+	print("back")

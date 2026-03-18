@@ -25,6 +25,8 @@ const LEVEL_MEDAL_REQUIREMENTS = {
 var player_steps = {}
 const SAVE_FILE = "user://player_steps.save"
 
+var play_intro_animation = true
+
 func _ready():
 	OS.set_window_position(Vector2(200, 50))
 

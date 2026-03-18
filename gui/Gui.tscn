@@ -76,6 +76,7 @@ rect_pivot_offset = Vector2( 40, 40 )
 shortcut_in_tooltip = false
 shortcut = SubResource( 12 )
 texture_normal = ExtResource( 3 )
+flip_v = true
 
 [node name="Restart" type="TextureButton" parent="."]
 margin_left = 1040.0

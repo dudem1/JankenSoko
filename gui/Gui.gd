@@ -86,4 +86,10 @@ func _on_Info_pressed():
 	print("info")
 
 func _on_Back_pressed():
-	print("back")
+	if !player.can_move: return
+
+	click_sound.play()
+
+	level.selected_level = "Level00"
+
+	level_animation_player.play("end_level")

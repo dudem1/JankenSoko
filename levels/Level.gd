@@ -8,9 +8,14 @@ onready var steps_animation_player = $Gui/Steps/AnimationPlayer
 onready var objects = $Contain/Objects
 onready var player = $Contain/Objects/Player
 onready var map = $Contain/Map
+onready var animation_player = $AnimationPlayer
 
 func _ready():
 	if self.name == "Level00":
+		if !Global.play_intro_animation:
+			$Intro.queue_free()
+			animation_player.play("start_level")
+
 		for level_name in Global.player_steps:
 			var steps = Global.player_steps[level_name]
 
@@ -84,6 +89,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		"intro":
 			$Intro.queue_free()
 			player.can_move = true
+			Global.play_intro_animation = false
 		"start_level": player.can_move = true
 		"restart_level": get_tree().reload_current_scene()
 		"end_level":

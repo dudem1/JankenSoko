@@ -19,8 +19,11 @@ func _ready():
 		for level_name in Global.player_steps:
 			var steps = Global.player_steps[level_name]
 
-			if level_name == "Level11": return
-			if steps > 0: objects.get_node("Lock" + level_name).queue_free()
+			if steps > 0:
+				if level_name != "Level11":
+					objects.get_node("Lock" + level_name).queue_free()
+			
+			objects.get_node("Trophy" + level_name).modulate = Global.set_trophy(level_name)
 
 func change_steps():
 	var steps = history.size()

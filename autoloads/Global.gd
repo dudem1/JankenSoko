@@ -9,8 +9,8 @@ var inputs = {
 }
 var speed = 7
 
-const LEVEL_MEDAL_REQUIREMENTS = {
-	"Level01": {"gold": 1, "silver": 2},
+const LEVEL_TROPHY_REQUIREMENTS = {
+	"Level01": {"gold": 33, "silver": 35},
 	"Level02": {"gold": 1, "silver": 2},
 	"Level03": {"gold": 1, "silver": 2},
 	"Level04": {"gold": 1, "silver": 2},
@@ -37,10 +37,10 @@ func load_steps():
 	var err = config.load(SAVE_FILE)
 
 	if err == OK:
-		for level_name in LEVEL_MEDAL_REQUIREMENTS.keys():
+		for level_name in LEVEL_TROPHY_REQUIREMENTS.keys():
 			player_steps[level_name] = config.get_value("steps", level_name, 0)
 	else:
-		for level_name in LEVEL_MEDAL_REQUIREMENTS.keys():
+		for level_name in LEVEL_TROPHY_REQUIREMENTS.keys():
 			player_steps[level_name] = 0
 
 func save_steps(level_name: String, steps: int) -> void:
@@ -56,16 +56,17 @@ func save_steps(level_name: String, steps: int) -> void:
 	var err = config.save(SAVE_FILE)
 	if err != OK: print("Error: ", err)
 
-func get_medal(level_name: String) -> String:
+func set_trophy(level_name: String) -> Color:
 	var steps = player_steps.get(level_name, 0)
 
-	if steps == 0: return "none"
+	if steps == 0: return Color(255, 255, 255) 
 
-	var req = LEVEL_MEDAL_REQUIREMENTS[level_name]
+	var req = LEVEL_TROPHY_REQUIREMENTS[level_name]
 
-	if steps <= req.gold: return "gold"
-	elif steps <= req.silver: return "silver"
-	else: return "bronze"
+	if steps <= req.gold: return Color("#FFD700")
+	elif steps <= req.silver: return Color("#C0C0C0")
+	else: return Color("#CD7F32")
+	 
 
 func _unhandled_input(event):
 	if event is InputEventKey and event.pressed and !event.echo:

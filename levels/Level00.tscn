@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://objects/Map.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/fonts/ANUDI___.ttf" type="DynamicFontData" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://objects/Finish.tscn" type="PackedScene" id=4]
 [ext_resource path="res://objects/Player.tscn" type="PackedScene" id=5]
 [ext_resource path="res://objects/Lock.tscn" type="PackedScene" id=6]
+[ext_resource path="res://objects/Trophy.tscn" type="PackedScene" id=7]
 [ext_resource path="res://gui/Gui.tscn" type="PackedScene" id=8]
 
 [sub_resource type="DynamicFont" id=4]
@@ -199,6 +200,39 @@ position = Vector2( 880, 480 )
 
 [node name="LockLevel10" parent="Contain/Objects" instance=ExtResource( 6 )]
 position = Vector2( 960, 320 )
+
+[node name="TrophyLevel01" parent="Contain/Objects" instance=ExtResource( 7 )]
+position = Vector2( 240, 0 )
+
+[node name="TrophyLevel02" parent="Contain/Objects" instance=ExtResource( 7 )]
+position = Vector2( 240, 640 )
+
+[node name="TrophyLevel03" parent="Contain/Objects" instance=ExtResource( 7 )]
+position = Vector2( 400, 0 )
+
+[node name="TrophyLevel04" parent="Contain/Objects" instance=ExtResource( 7 )]
+position = Vector2( 400, 640 )
+
+[node name="TrophyLevel05" parent="Contain/Objects" instance=ExtResource( 7 )]
+position = Vector2( 560, 0 )
+
+[node name="TrophyLevel06" parent="Contain/Objects" instance=ExtResource( 7 )]
+position = Vector2( 560, 640 )
+
+[node name="TrophyLevel07" parent="Contain/Objects" instance=ExtResource( 7 )]
+position = Vector2( 720, 0 )
+
+[node name="TrophyLevel08" parent="Contain/Objects" instance=ExtResource( 7 )]
+position = Vector2( 720, 640 )
+
+[node name="TrophyLevel09" parent="Contain/Objects" instance=ExtResource( 7 )]
+position = Vector2( 880, 0 )
+
+[node name="TrophyLevel10" parent="Contain/Objects" instance=ExtResource( 7 )]
+position = Vector2( 880, 640 )
+
+[node name="TrophyLevel11" parent="Contain/Objects" instance=ExtResource( 7 )]
+position = Vector2( 1120, 320 )
 
 [node name="Player" parent="Contain/Objects" instance=ExtResource( 5 )]
 position = Vector2( 560, 320 )

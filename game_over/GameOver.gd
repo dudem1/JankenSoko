@@ -17,8 +17,8 @@ onready var trophies = {
 		"count": 0
 	}
 }
-
 onready var steps_taken_label = $GameStats/StepsTakenHBoxContainer/StepsTakenValueLabel
+onready var animation_player = $AnimationPlayer
 
 var count_steps = 0
 var can_continue = false
@@ -49,3 +49,12 @@ func _ready():
 func _on_AnimationPlayer_animation_finished(_anim_name):
 	if can_continue: get_tree().change_scene("res://levels/level00.tscn")
 	else: can_continue = true
+	
+func _input(event):
+	if animation_player.is_playing(): return
+
+	if event is InputEventMouseButton and event.pressed:
+		animation_player.play_backwards("fade_in")
+
+	if event is InputEventKey and event.pressed:
+		animation_player.play_backwards("fade_in")

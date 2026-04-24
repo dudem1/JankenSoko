@@ -1,19 +1,69 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://gui/Gui.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/ui/restart_button.png" type="Texture" id=2]
 [ext_resource path="res://assets/images/ui/undo_button.png" type="Texture" id=3]
-[ext_resource path="res://assets/images/ui/info_button.png" type="Texture" id=4]
+[ext_resource path="res://assets/images/ui/menu_button.png" type="Texture" id=4]
 [ext_resource path="res://assets/images/ui/steps.png" type="Texture" id=5]
 [ext_resource path="res://assets/fonts/MONOFONT.TTF" type="DynamicFontData" id=6]
 [ext_resource path="res://assets/sounds/click.mp3" type="AudioStream" id=7]
 [ext_resource path="res://assets/fonts/ANUDI___.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://objects/Trophy.tscn" type="PackedScene" id=9]
+[ext_resource path="res://assets/images/ui/wasd-keys.png" type="Texture" id=10]
+[ext_resource path="res://assets/images/ui/swipe.png" type="Texture" id=11]
+[ext_resource path="res://assets/images/ui/arrow-keys.png" type="Texture" id=12]
+[ext_resource path="res://assets/images/ui/space-key.png" type="Texture" id=13]
+[ext_resource path="res://assets/images/ui/r-key.png" type="Texture" id=14]
+[ext_resource path="res://assets/fonts/AccidentalPresidency.ttf" type="DynamicFontData" id=15]
 
-[sub_resource type="InputEventAction" id=11]
-action = "ui_back"
+[sub_resource type="StyleBoxFlat" id=15]
+bg_color = Color( 0.454902, 0.768627, 0.898039, 0.784314 )
+corner_radius_top_left = 8
+corner_radius_bottom_left = 8
 
-[sub_resource type="ShortCut" id=12]
-shortcut = SubResource( 11 )
+[sub_resource type="DynamicFont" id=16]
+size = 32
+font_data = ExtResource( 15 )
+
+[sub_resource type="StyleBoxFlat" id=9]
+bg_color = Color( 0.454902, 0.768627, 0.898039, 0.784314 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="DynamicFont" id=19]
+size = 33
+outline_color = Color( 0, 0, 0, 0.784314 )
+font_data = ExtResource( 15 )
+
+[sub_resource type="Animation" id=20]
+resource_name = "show"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="InputEventAction" id=1]
 action = "ui_restart"
@@ -26,12 +76,6 @@ action = "ui_undo"
 
 [sub_resource type="ShortCut" id=4]
 shortcut = SubResource( 3 )
-
-[sub_resource type="InputEventAction" id=6]
-action = "ui_info"
-
-[sub_resource type="ShortCut" id=7]
-shortcut = SubResource( 6 )
 
 [sub_resource type="DynamicFont" id=5]
 size = 82
@@ -52,31 +96,252 @@ tracks/0/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1.1, 1.1 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="StyleBoxFlat" id=9]
-bg_color = Color( 0.454902, 0.768627, 0.898039, 0.784314 )
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-
 [sub_resource type="DynamicFont" id=10]
 size = 34
 outline_color = Color( 0, 0, 0, 0.784314 )
 font_data = ExtResource( 8 )
+
+[sub_resource type="DynamicFont" id=13]
+size = 44
+font_data = ExtResource( 6 )
+
+[sub_resource type="Animation" id=14]
+resource_name = "show_and_hide"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 2.8, 3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [node name="Gui" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
 
-[node name="Back" type="TextureButton" parent="."]
-margin_right = 80.0
-margin_bottom = 80.0
+[node name="Menu" type="TextureButton" parent="."]
+margin_left = 1200.0
+margin_top = 640.0
+margin_right = 1280.0
+margin_bottom = 720.0
 rect_pivot_offset = Vector2( 40, 40 )
+focus_mode = 0
+toggle_mode = true
 shortcut_in_tooltip = false
-shortcut = SubResource( 12 )
-texture_normal = ExtResource( 3 )
-flip_v = true
+texture_normal = ExtResource( 4 )
+
+[node name="MenuPanel" type="Panel" parent="."]
+margin_left = 1280.0
+margin_top = 400.0
+margin_right = 1520.0
+margin_bottom = 640.0
+custom_styles/panel = SubResource( 15 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuPanel"]
+margin_right = 240.0
+margin_bottom = 240.0
+alignment = 1
+
+[node name="SelectLevelButton" type="Button" parent="MenuPanel/VBoxContainer"]
+margin_top = 2.0
+margin_right = 240.0
+margin_bottom = 46.0
+focus_mode = 0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 16 )
+shortcut_in_tooltip = false
+text = "Select level"
+flat = true
+
+[node name="RestartLevelButton" type="Button" parent="MenuPanel/VBoxContainer"]
+margin_top = 50.0
+margin_right = 240.0
+margin_bottom = 94.0
+focus_mode = 0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 16 )
+shortcut_in_tooltip = false
+text = "Restart level"
+flat = true
+
+[node name="MuteMusicButton" type="Button" parent="MenuPanel/VBoxContainer"]
+margin_top = 98.0
+margin_right = 240.0
+margin_bottom = 142.0
+focus_mode = 0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 16 )
+toggle_mode = true
+shortcut_in_tooltip = false
+text = "Mute music"
+flat = true
+
+[node name="MuteSoundsButton" type="Button" parent="MenuPanel/VBoxContainer"]
+margin_top = 146.0
+margin_right = 240.0
+margin_bottom = 190.0
+focus_mode = 0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 16 )
+toggle_mode = true
+shortcut_in_tooltip = false
+text = "Mute sounds"
+flat = true
+
+[node name="ControlsButton" type="Button" parent="MenuPanel/VBoxContainer"]
+margin_top = 194.0
+margin_right = 240.0
+margin_bottom = 238.0
+focus_mode = 0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 16 )
+toggle_mode = true
+shortcut_in_tooltip = false
+text = "Controls"
+flat = true
+
+[node name="ControlsPanel" type="Panel" parent="."]
+visible = false
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 320.0
+margin_top = 160.0
+margin_right = 960.0
+margin_bottom = 560.0
+custom_styles/panel = SubResource( 9 )
+
+[node name="MovementLabel" type="Label" parent="ControlsPanel"]
+margin_left = 40.0
+margin_top = 50.0
+margin_right = 600.0
+margin_bottom = 90.0
+custom_fonts/font = SubResource( 19 )
+text = "Movements:"
+
+[node name="OrLabel" type="Label" parent="ControlsPanel"]
+margin_left = 410.0
+margin_top = 130.0
+margin_right = 450.0
+margin_bottom = 170.0
+custom_fonts/font = SubResource( 19 )
+text = "or"
+align = 1
+
+[node name="OrLabel2" type="Label" parent="ControlsPanel"]
+margin_left = 190.0
+margin_top = 130.0
+margin_right = 230.0
+margin_bottom = 170.0
+custom_fonts/font = SubResource( 19 )
+text = "or"
+align = 1
+
+[node name="WasdKeysTextureRect" type="TextureRect" parent="ControlsPanel"]
+margin_left = 40.0
+margin_top = 110.0
+margin_right = 160.0
+margin_bottom = 190.0
+texture = ExtResource( 10 )
+
+[node name="ArrowKeysTextureRect" type="TextureRect" parent="ControlsPanel"]
+margin_left = 260.0
+margin_top = 110.0
+margin_right = 381.0
+margin_bottom = 190.0
+texture = ExtResource( 12 )
+
+[node name="SwipeTextureRect" type="TextureRect" parent="ControlsPanel"]
+modulate = Color( 0.227451, 0.227451, 0.227451, 1 )
+margin_left = 480.0
+margin_top = 90.0
+margin_right = 601.0
+margin_bottom = 211.0
+texture = ExtResource( 11 )
+
+[node name="RestartLevelLabel" type="Label" parent="ControlsPanel"]
+margin_left = 40.0
+margin_top = 240.0
+margin_right = 236.0
+margin_bottom = 280.0
+custom_fonts/font = SubResource( 19 )
+text = "Restart level:"
+
+[node name="RKeyTextureRect" type="TextureRect" parent="ControlsPanel"]
+margin_left = 210.0
+margin_top = 240.0
+margin_right = 250.0
+margin_bottom = 279.0
+texture = ExtResource( 14 )
+
+[node name="OrLabel3" type="Label" parent="ControlsPanel"]
+margin_left = 280.0
+margin_top = 240.0
+margin_right = 320.0
+margin_bottom = 280.0
+custom_fonts/font = SubResource( 19 )
+text = "or"
+align = 1
+
+[node name="RestartLevelTextureRect" type="TextureRect" parent="ControlsPanel"]
+modulate = Color( 0.227451, 0.227451, 0.227451, 1 )
+margin_left = 330.0
+margin_top = 220.0
+margin_right = 410.0
+margin_bottom = 300.0
+texture = ExtResource( 2 )
+
+[node name="UndoStepLabel" type="Label" parent="ControlsPanel"]
+margin_left = 40.0
+margin_top = 310.0
+margin_right = 200.0
+margin_bottom = 350.0
+custom_fonts/font = SubResource( 19 )
+text = "Undo step:"
+
+[node name="SpaceKeyTextureRect" type="TextureRect" parent="ControlsPanel"]
+margin_left = 180.0
+margin_top = 310.0
+margin_right = 422.0
+margin_bottom = 349.0
+texture = ExtResource( 13 )
+
+[node name="OrLabel4" type="Label" parent="ControlsPanel"]
+margin_left = 450.0
+margin_top = 310.0
+margin_right = 490.0
+margin_bottom = 350.0
+custom_fonts/font = SubResource( 19 )
+text = "or"
+align = 1
+
+[node name="UndoStepTextureRect" type="TextureRect" parent="ControlsPanel"]
+modulate = Color( 0.227451, 0.227451, 0.227451, 1 )
+margin_left = 500.0
+margin_top = 290.0
+margin_right = 580.0
+margin_bottom = 370.0
+texture = ExtResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ControlsPanel"]
+anims/show = SubResource( 20 )
 
 [node name="Restart" type="TextureButton" parent="."]
 margin_left = 1040.0
@@ -100,23 +365,10 @@ shortcut_in_tooltip = false
 shortcut = SubResource( 4 )
 texture_normal = ExtResource( 3 )
 
-[node name="Info" type="TextureButton" parent="."]
-margin_left = 1200.0
-margin_top = 640.0
-margin_right = 1280.0
-margin_bottom = 720.0
-rect_pivot_offset = Vector2( 40, 40 )
-focus_mode = 0
-shortcut_in_tooltip = false
-shortcut = SubResource( 7 )
-texture_normal = ExtResource( 4 )
-
 [node name="Steps" type="Control" parent="."]
-anchor_right = 0.096
-anchor_bottom = 0.117
 margin_top = 640.0
-margin_right = 117.12
-margin_bottom = 635.76
+margin_right = 240.0
+margin_bottom = 720.0
 
 [node name="TextureRect" type="TextureRect" parent="Steps"]
 margin_right = 80.0
@@ -136,12 +388,9 @@ valign = 1
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Steps"]
 anims/change = SubResource( 8 )
 
-[node name="ClickSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 7 )
-bus = "SFX"
-
 [node name="FinishPanel" type="Panel" parent="."]
 visible = false
+modulate = Color( 1, 1, 1, 0 )
 margin_left = 320.0
 margin_top = 160.0
 margin_right = 960.0
@@ -153,11 +402,36 @@ margin_top = 40.0
 margin_right = 640.0
 margin_bottom = 120.0
 custom_fonts/font = SubResource( 10 )
-text = "Level Completed!"
+text = "Level Completed"
 align = 1
 valign = 1
 
-[connection signal="pressed" from="Back" to="." method="_on_Back_pressed"]
+[node name="Trophy" parent="FinishPanel" instance=ExtResource( 9 )]
+self_modulate = Color( 2, 2, 2, 1 )
+position = Vector2( 280, 200 )
+
+[node name="TrophyLabel" type="Label" parent="FinishPanel"]
+margin_left = 40.0
+margin_top = 280.0
+margin_right = 600.0
+margin_bottom = 360.0
+custom_fonts/font = SubResource( 13 )
+align = 1
+valign = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="FinishPanel"]
+anims/show_and_hide = SubResource( 14 )
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+bus = "SFX"
+
+[connection signal="toggled" from="Menu" to="." method="_on_Menu_toggled"]
+[connection signal="pressed" from="MenuPanel/VBoxContainer/SelectLevelButton" to="." method="_on_SelectLevelButton_pressed"]
+[connection signal="pressed" from="MenuPanel/VBoxContainer/RestartLevelButton" to="." method="_on_RestartLevelButton_pressed"]
+[connection signal="toggled" from="MenuPanel/VBoxContainer/MuteMusicButton" to="." method="_on_MuteMusicButton_toggled"]
+[connection signal="toggled" from="MenuPanel/VBoxContainer/MuteSoundsButton" to="." method="_on_MuteSoundsButton_toggled"]
+[connection signal="toggled" from="MenuPanel/VBoxContainer/ControlsButton" to="." method="_on_ControlsButton_toggled"]
 [connection signal="pressed" from="Restart" to="." method="_on_Restart_pressed"]
 [connection signal="pressed" from="Undo" to="." method="_on_Undo_pressed"]
-[connection signal="pressed" from="Info" to="." method="_on_Info_pressed"]
+[connection signal="animation_finished" from="FinishPanel/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

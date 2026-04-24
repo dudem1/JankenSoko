@@ -3,10 +3,10 @@
 [ext_resource path="res://objects/Map.tscn" type="PackedScene" id=1]
 [ext_resource path="res://levels/Level.gd" type="Script" id=2]
 [ext_resource path="res://objects/Finish.tscn" type="PackedScene" id=3]
-[ext_resource path="res://objects/Scissors.tscn" type="PackedScene" id=4]
+[ext_resource path="res://objects/Paper.tscn" type="PackedScene" id=4]
 [ext_resource path="res://objects/Player.tscn" type="PackedScene" id=5]
-[ext_resource path="res://objects/Paper.tscn" type="PackedScene" id=6]
-[ext_resource path="res://objects/Rock.tscn" type="PackedScene" id=7]
+[ext_resource path="res://objects/Rock.tscn" type="PackedScene" id=6]
+[ext_resource path="res://objects/Scissors.tscn" type="PackedScene" id=7]
 [ext_resource path="res://gui/Gui.tscn" type="PackedScene" id=8]
 
 [sub_resource type="Animation" id=2]
@@ -108,47 +108,45 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[node name="Level01" type="Node2D"]
+[node name="Level05" type="Node2D"]
 script = ExtResource( 2 )
 
 [node name="Contain" type="Node2D" parent="."]
-modulate = Color( 1, 1, 1, 0 )
-position = Vector2( 0, -360 )
 
 [node name="Map" parent="Contain" instance=ExtResource( 1 )]
-tile_data = PoolIntArray( 65542, 1, 0, 65544, 0, 0, 65545, 1, 0, 65546, 1, 0, 131076, 0, 0, 131077, 1, 0, 131078, 1, 0, 131080, 1, 0, 131081, 1, 0, 131082, 1, 0, 196612, 1, 0, 196613, 1, 0, 196614, 1, 0, 196615, 0, 0, 196616, 1, 0, 196617, 0, 0, 196618, 1, 0, 262148, 1, 0, 262149, 0, 0, 262150, 1, 0, 262151, 1, 0, 262152, 1, 0, 262153, 1, 0, 262154, 1, 0, 327684, 1, 0, 327685, 1, 0, 327686, 1, 0, 327687, 0, 0, 327688, 0, 0, 327689, 0, 0, 327690, 1, 0, 393220, 0, 0, 393221, 1, 0, 393222, 1, 0, 393226, 1, 0, 458762, 1, 0 )
+tile_data = PoolIntArray( 131076, 1, 0, 131077, 1, 0, 131078, 1, 0, 131079, 1, 0, 131080, 1, 0, 131081, 0, 0, 131082, 0, 0, 196612, 1, 0, 196613, 0, 0, 196614, 1, 0, 196615, 0, 0, 196616, 1, 0, 196617, 0, 0, 196618, 0, 0, 262148, 1, 0, 262149, 1, 0, 262150, 1, 0, 262151, 1, 0, 262152, 1, 0, 262153, 1, 0, 262154, 1, 0, 327684, 1, 0, 327685, 0, 0, 327686, 1, 0, 327687, 1, 0, 327688, 1, 0, 327689, 1, 0, 327690, 1, 0, 393220, 1, 0, 393221, 1, 0, 393222, 1, 0, 393223, 0, 0, 393224, 0, 0, 393225, 1, 0, 393226, 0, 0 )
 
 [node name="Objects" type="Node2D" parent="Contain"]
 
 [node name="Finish" parent="Contain/Objects" instance=ExtResource( 3 )]
-position = Vector2( 800, 480 )
+position = Vector2( 400, 160 )
 
 [node name="Player" parent="Contain/Objects" instance=ExtResource( 5 )]
-position = Vector2( 480, 80 )
+position = Vector2( 720, 480 )
 
-[node name="Scissors" parent="Contain/Objects" instance=ExtResource( 4 )]
+[node name="Paper" parent="Contain/Objects" instance=ExtResource( 4 )]
 position = Vector2( 480, 240 )
 
-[node name="Scissors2" parent="Contain/Objects" instance=ExtResource( 4 )]
-position = Vector2( 720, 160 )
+[node name="Paper2" parent="Contain/Objects" instance=ExtResource( 4 )]
+position = Vector2( 480, 160 )
 
-[node name="Rock" parent="Contain/Objects" instance=ExtResource( 7 )]
-position = Vector2( 480, 320 )
+[node name="Paper3" parent="Contain/Objects" instance=ExtResource( 4 )]
+position = Vector2( 560, 160 )
 
-[node name="Rock2" parent="Contain/Objects" instance=ExtResource( 7 )]
-position = Vector2( 800, 320 )
+[node name="Paper4" parent="Contain/Objects" instance=ExtResource( 4 )]
+position = Vector2( 320, 240 )
 
-[node name="Paper" parent="Contain/Objects" instance=ExtResource( 6 )]
-position = Vector2( 800, 400 )
+[node name="Rock" parent="Contain/Objects" instance=ExtResource( 6 )]
+position = Vector2( 480, 400 )
 
-[node name="Paper2" parent="Contain/Objects" instance=ExtResource( 6 )]
-position = Vector2( 400, 400 )
+[node name="Rock2" parent="Contain/Objects" instance=ExtResource( 6 )]
+position = Vector2( 320, 160 )
 
-[node name="Paper3" parent="Contain/Objects" instance=ExtResource( 6 )]
+[node name="Scissors" parent="Contain/Objects" instance=ExtResource( 7 )]
+position = Vector2( 560, 400 )
+
+[node name="Scissors2" parent="Contain/Objects" instance=ExtResource( 7 )]
 position = Vector2( 720, 320 )
-
-[node name="Paper4" parent="Contain/Objects" instance=ExtResource( 6 )]
-position = Vector2( 800, 240 )
 
 [node name="Gui" parent="." instance=ExtResource( 8 )]
 

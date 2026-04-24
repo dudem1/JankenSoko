@@ -12,6 +12,9 @@ onready var animation_player = $AnimationPlayer
 
 func _ready():
 	if self.name == "Level00":
+		if Global.back_from_level != "Level00":
+			player.position = objects.get_node("BackFrom" + Global.back_from_level).position
+
 		if !Global.play_intro_animation:
 			$Intro.queue_free()
 			animation_player.play("start_level")
@@ -23,7 +26,9 @@ func _ready():
 				if level_name != "Level11":
 					objects.get_node("Lock" + level_name).queue_free()
 			
-			objects.get_node("Trophy" + level_name).modulate = Global.set_trophy(level_name)
+			objects.get_node("Trophy" + level_name).modulate = Global.set_trophy(level_name, Global.player_steps.get(level_name, 0))
+
+	Global.back_from_level = self.name
 
 func change_steps():
 	var steps = history.size()
@@ -96,4 +101,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		"start_level": player.can_move = true
 		"restart_level": get_tree().reload_current_scene()
 		"end_level":
-			get_tree().change_scene("res://levels/"+selected_level+".tscn")
+			if self.name == "Level11":
+				get_tree().change_scene("res://game_over/GameOver.tscn")
+			else:
+				get_tree().change_scene("res://levels/"+selected_level+".tscn")

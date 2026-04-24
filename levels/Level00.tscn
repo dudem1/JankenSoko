@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://objects/Map.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/fonts/ANUDI___.ttf" type="DynamicFontData" id=2]
@@ -41,6 +41,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("Contain/Objects/Player:can_move")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=5]
 resource_name = "intro"
@@ -68,23 +80,6 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ false, true ]
-}
-
-[sub_resource type="Animation" id=3]
-resource_name = "restart_level"
-length = 0.2
-step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath("Contain:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
 [sub_resource type="Animation" id=1]
@@ -132,115 +127,148 @@ tracks/2/keys = {
 script = ExtResource( 3 )
 
 [node name="Contain" type="Node2D" parent="."]
+visible = false
 
 [node name="Map" parent="Contain" instance=ExtResource( 1 )]
-tile_data = PoolIntArray( 65539, 1, 0, 65541, 1, 0, 65543, 1, 0, 65545, 1, 0, 65547, 1, 0, 131075, 1, 0, 131077, 1, 0, 131079, 1, 0, 131081, 1, 0, 131083, 1, 0, 196611, 1, 0, 196612, 1, 0, 196613, 1, 0, 196614, 1, 0, 196615, 1, 0, 196616, 1, 0, 196617, 1, 0, 196618, 1, 0, 196619, 1, 0, 262147, 1, 0, 262148, 1, 0, 262149, 1, 0, 262150, 1, 0, 262151, 1, 0, 262152, 1, 0, 262153, 1, 0, 262154, 1, 0, 262155, 1, 0, 262156, 1, 0, 262157, 1, 0, 327683, 1, 0, 327684, 1, 0, 327685, 1, 0, 327686, 1, 0, 327687, 1, 0, 327688, 1, 0, 327689, 1, 0, 327690, 1, 0, 327691, 1, 0, 393219, 1, 0, 393221, 1, 0, 393223, 1, 0, 393225, 1, 0, 393227, 1, 0, 458755, 1, 0, 458757, 1, 0, 458759, 1, 0, 458761, 1, 0, 458763, 1, 0 )
+tile_data = PoolIntArray( 131074, 1, 0, 131076, 1, 0, 131078, 1, 0, 131080, 1, 0, 131082, 1, 0, 196610, 1, 0, 196612, 1, 0, 196614, 1, 0, 196616, 1, 0, 196618, 1, 0, 262146, 1, 0, 262147, 1, 0, 262148, 1, 0, 262149, 1, 0, 262150, 1, 0, 262151, 1, 0, 262152, 1, 0, 262153, 1, 0, 262154, 1, 0, 262155, 1, 0, 262156, 1, 0, 262157, 1, 0, 327682, 1, 0, 327684, 1, 0, 327686, 1, 0, 327688, 1, 0, 327690, 1, 0, 393218, 1, 0, 393220, 1, 0, 393222, 1, 0, 393224, 1, 0, 393226, 1, 0 )
 
 [node name="Objects" type="Node2D" parent="Contain"]
 
 [node name="Level01" parent="Contain/Objects" instance=ExtResource( 4 )]
-position = Vector2( 240, 80 )
+position = Vector2( 160, 160 )
 
 [node name="Level02" parent="Contain/Objects" instance=ExtResource( 4 )]
-position = Vector2( 240, 560 )
+position = Vector2( 160, 480 )
 
 [node name="Level03" parent="Contain/Objects" instance=ExtResource( 4 )]
-position = Vector2( 400, 80 )
+position = Vector2( 320, 160 )
 
 [node name="Level04" parent="Contain/Objects" instance=ExtResource( 4 )]
-position = Vector2( 400, 560 )
+position = Vector2( 320, 480 )
 
 [node name="Level05" parent="Contain/Objects" instance=ExtResource( 4 )]
-position = Vector2( 560, 80 )
+position = Vector2( 480, 160 )
 
 [node name="Level06" parent="Contain/Objects" instance=ExtResource( 4 )]
-position = Vector2( 560, 560 )
+position = Vector2( 480, 480 )
 
 [node name="Level07" parent="Contain/Objects" instance=ExtResource( 4 )]
-position = Vector2( 720, 80 )
+position = Vector2( 640, 160 )
 
 [node name="Level08" parent="Contain/Objects" instance=ExtResource( 4 )]
-position = Vector2( 720, 560 )
+position = Vector2( 640, 480 )
 
 [node name="Level09" parent="Contain/Objects" instance=ExtResource( 4 )]
-position = Vector2( 880, 80 )
+position = Vector2( 800, 160 )
 
 [node name="Level10" parent="Contain/Objects" instance=ExtResource( 4 )]
-position = Vector2( 880, 560 )
+position = Vector2( 800, 480 )
 
 [node name="Level11" parent="Contain/Objects" instance=ExtResource( 4 )]
 position = Vector2( 1040, 320 )
 
 [node name="LockLevel01" parent="Contain/Objects" instance=ExtResource( 6 )]
-position = Vector2( 240, 480 )
+position = Vector2( 160, 400 )
 
 [node name="LockLevel02" parent="Contain/Objects" instance=ExtResource( 6 )]
-position = Vector2( 400, 160 )
+position = Vector2( 320, 240 )
 
 [node name="LockLevel03" parent="Contain/Objects" instance=ExtResource( 6 )]
-position = Vector2( 400, 480 )
+position = Vector2( 320, 400 )
 
 [node name="LockLevel04" parent="Contain/Objects" instance=ExtResource( 6 )]
-position = Vector2( 560, 160 )
+position = Vector2( 480, 240 )
 
 [node name="LockLevel05" parent="Contain/Objects" instance=ExtResource( 6 )]
-position = Vector2( 560, 480 )
+position = Vector2( 480, 400 )
 
 [node name="LockLevel06" parent="Contain/Objects" instance=ExtResource( 6 )]
-position = Vector2( 720, 160 )
+position = Vector2( 640, 240 )
 
 [node name="LockLevel07" parent="Contain/Objects" instance=ExtResource( 6 )]
-position = Vector2( 720, 480 )
+position = Vector2( 640, 400 )
 
 [node name="LockLevel08" parent="Contain/Objects" instance=ExtResource( 6 )]
-position = Vector2( 880, 160 )
+position = Vector2( 800, 240 )
 
 [node name="LockLevel09" parent="Contain/Objects" instance=ExtResource( 6 )]
-position = Vector2( 880, 480 )
+position = Vector2( 800, 400 )
 
 [node name="LockLevel10" parent="Contain/Objects" instance=ExtResource( 6 )]
 position = Vector2( 960, 320 )
 
 [node name="TrophyLevel01" parent="Contain/Objects" instance=ExtResource( 7 )]
-position = Vector2( 240, 0 )
+position = Vector2( 160, 80 )
 
 [node name="TrophyLevel02" parent="Contain/Objects" instance=ExtResource( 7 )]
-position = Vector2( 240, 640 )
+position = Vector2( 160, 560 )
 
 [node name="TrophyLevel03" parent="Contain/Objects" instance=ExtResource( 7 )]
-position = Vector2( 400, 0 )
+position = Vector2( 320, 80 )
 
 [node name="TrophyLevel04" parent="Contain/Objects" instance=ExtResource( 7 )]
-position = Vector2( 400, 640 )
+position = Vector2( 320, 560 )
 
 [node name="TrophyLevel05" parent="Contain/Objects" instance=ExtResource( 7 )]
-position = Vector2( 560, 0 )
+position = Vector2( 480, 80 )
 
 [node name="TrophyLevel06" parent="Contain/Objects" instance=ExtResource( 7 )]
-position = Vector2( 560, 640 )
+position = Vector2( 480, 560 )
 
 [node name="TrophyLevel07" parent="Contain/Objects" instance=ExtResource( 7 )]
-position = Vector2( 720, 0 )
+position = Vector2( 640, 80 )
 
 [node name="TrophyLevel08" parent="Contain/Objects" instance=ExtResource( 7 )]
-position = Vector2( 720, 640 )
+position = Vector2( 640, 560 )
 
 [node name="TrophyLevel09" parent="Contain/Objects" instance=ExtResource( 7 )]
-position = Vector2( 880, 0 )
+position = Vector2( 800, 80 )
 
 [node name="TrophyLevel10" parent="Contain/Objects" instance=ExtResource( 7 )]
-position = Vector2( 880, 640 )
+position = Vector2( 800, 560 )
 
 [node name="TrophyLevel11" parent="Contain/Objects" instance=ExtResource( 7 )]
 position = Vector2( 1120, 320 )
 
+[node name="BackFromLevel01" type="Node2D" parent="Contain/Objects"]
+position = Vector2( 160, 240 )
+
+[node name="BackFromLevel02" type="Node2D" parent="Contain/Objects"]
+position = Vector2( 160, 400 )
+
+[node name="BackFromLevel03" type="Node2D" parent="Contain/Objects"]
+position = Vector2( 320, 240 )
+
+[node name="BackFromLevel04" type="Node2D" parent="Contain/Objects"]
+position = Vector2( 320, 400 )
+
+[node name="BackFromLevel05" type="Node2D" parent="Contain/Objects"]
+position = Vector2( 480, 240 )
+
+[node name="BackFromLevel06" type="Node2D" parent="Contain/Objects"]
+position = Vector2( 480, 400 )
+
+[node name="BackFromLevel07" type="Node2D" parent="Contain/Objects"]
+position = Vector2( 640, 240 )
+
+[node name="BackFromLevel08" type="Node2D" parent="Contain/Objects"]
+position = Vector2( 640, 400 )
+
+[node name="BackFromLevel09" type="Node2D" parent="Contain/Objects"]
+position = Vector2( 800, 240 )
+
+[node name="BackFromLevel10" type="Node2D" parent="Contain/Objects"]
+position = Vector2( 800, 400 )
+
+[node name="BackFromLevel11" type="Node2D" parent="Contain/Objects"]
+position = Vector2( 960, 320 )
+
 [node name="Player" parent="Contain/Objects" instance=ExtResource( 5 )]
-position = Vector2( 560, 320 )
+position = Vector2( 480, 320 )
 
 [node name="Gui" parent="." instance=ExtResource( 8 )]
 
 [node name="Intro" type="Control" parent="."]
-visible = false
 margin_right = 1280.0
 margin_bottom = 720.0
 
@@ -268,7 +296,6 @@ text = "JankenSoko"
 autoplay = "intro"
 anims/end_level = SubResource( 2 )
 anims/intro = SubResource( 5 )
-anims/restart_level = SubResource( 3 )
 anims/start_level = SubResource( 1 )
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

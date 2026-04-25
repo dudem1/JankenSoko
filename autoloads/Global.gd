@@ -28,6 +28,9 @@ const CONFIG_FILE = "user://config.cfg"
 var play_intro_animation = true
 var back_from_level = "Level00"
 
+var total_time = 0.0
+var timer_running = false
+
 func _ready():
 	OS.set_window_position(Vector2(200, 50))
 
@@ -38,6 +41,8 @@ func _ready():
 		for level_name in LEVEL_TROPHY_REQUIREMENTS.keys():
 			player_steps[level_name] = config.get_value("steps", level_name, 0)
 
+		total_time = config.get_value("stats", "total_time", 0.0)
+
 		Music.playing = !config.get_value("config", "mute_music", 0)
 
 		AudioServer.set_bus_mute(AudioServer.get_bus_index("SFX"), config.get_value("config", "mute_sounds", 0))
@@ -46,6 +51,10 @@ func _ready():
 			player_steps[level_name] = 0
 		
 		Music.play()
+
+func _process(delta):
+	if timer_running:
+		total_time += delta
 
 func save_steps(level_name: String, steps: int) -> void:
 	if player_steps.has(level_name) and steps >= player_steps[level_name] and player_steps[level_name] != 0:
@@ -57,6 +66,9 @@ func save_steps(level_name: String, steps: int) -> void:
 	config.load(CONFIG_FILE)
 	for lname in player_steps.keys():
 		config.set_value("steps", lname, player_steps[lname])
+
+	# save time
+	config.set_value("stats", "total_time", total_time)
 
 	var err = config.save(CONFIG_FILE)
 	if err != OK: print("Error: ", err)
@@ -123,3 +135,12 @@ func move_tween(node: Node2D, tween: SceneTreeTween, dir) -> SceneTreeTween:
 
 func adjust_pitch(audio: AudioStreamPlayer) -> float:
 	return clamp(audio.stream.get_length() * speed, 0.1, 20.0)
+
+func get_time_formatted() -> String:
+	var total_sec = int(total_time)
+
+	var hours = total_sec / 3600
+	var minutes = (total_sec % 3600) / 60
+	var seconds = total_sec % 60
+
+	return "%02d:%02d:%02d" % [hours, minutes, seconds]

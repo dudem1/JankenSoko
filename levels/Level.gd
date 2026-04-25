@@ -98,6 +98,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 			$Intro.queue_free()
 			player.can_move = true
 			Global.play_intro_animation = false
+			Global.timer_running = true
 		"start_level": player.can_move = true
 		"restart_level": get_tree().reload_current_scene()
 		"end_level":

@@ -11,9 +11,9 @@ config_version=4
 [application]
 
 config/name="JankenSoko"
-config/description="A Push-Based Puzzle Game"
+config/description="A puzzle game that combines classic sokoban gameplay with the logic of rock-paper-scissors."
 run/main_scene="res://levels/Level00.tscn"
-config/icon="res://icon.png"
+config/icon="res://assets/images/player.png"
 
 [autoload]
 

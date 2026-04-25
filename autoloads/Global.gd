@@ -110,11 +110,6 @@ func get_steps_to_next_trophy(level_name: String, steps: int) -> String:
 
 	return str(diff) + " " + step_word + " away from " + target + "!"
 
-func _unhandled_input(event):
-	if event is InputEventKey and event.pressed and !event.echo:
-		if event.scancode == KEY_ESCAPE:
-			get_tree().quit()
-
 func move_tween(node: Node2D, tween: SceneTreeTween, dir) -> SceneTreeTween:
 	if tween:
 		tween.kill()

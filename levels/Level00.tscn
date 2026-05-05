@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://objects/Map.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/fonts/ANUDI___.ttf" type="DynamicFontData" id=2]
@@ -8,10 +8,15 @@
 [ext_resource path="res://objects/Lock.tscn" type="PackedScene" id=6]
 [ext_resource path="res://objects/Trophy.tscn" type="PackedScene" id=7]
 [ext_resource path="res://gui/Gui.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/fonts/AccidentalPresidency.ttf" type="DynamicFontData" id=9]
 
 [sub_resource type="DynamicFont" id=4]
 size = 90
 font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 30
+font_data = ExtResource( 9 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "end_level"
@@ -291,6 +296,15 @@ custom_fonts/normal_font = SubResource( 4 )
 bbcode_enabled = true
 bbcode_text = "[wave amp=50 freq=5]JankenSoko[/wave]"
 text = "JankenSoko"
+
+[node name="Label" type="Label" parent="Intro"]
+margin_left = 1201.0
+margin_top = 675.0
+margin_right = 1266.0
+margin_bottom = 710.0
+custom_colors/font_color = Color( 0.552941, 0.796078, 0.890196, 1 )
+custom_fonts/font = SubResource( 6 )
+text = "Dudem"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "intro"

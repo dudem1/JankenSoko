@@ -31,6 +31,22 @@ var back_from_level = "Level00"
 var total_time = 0.0
 var timer_running = false
 
+var fullscreen_requested = false
+
+func _input(event):
+	if fullscreen_requested:
+		return
+
+	if event is InputEventScreenTouch and event.pressed:
+		OS.window_fullscreen = true
+		JavaScript.eval("""
+			if (document.documentElement.requestFullscreen) {
+				document.documentElement.requestFullscreen();
+			}
+		""")
+
+		fullscreen_requested = true
+
 func _ready():
 	OS.set_window_position(Vector2(200, 50))
 

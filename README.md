@@ -2,6 +2,8 @@
 
 A puzzle game that combines classic sokoban gameplay with the logic of rock-paper-scissors.
 
+![small animated demo](https://img.itch.zone/aW1nLzI3Mjc1MDk1LmdpZg==/original/0tp0Ki.gif)
+
 ## Controls 🕹️
 
 Movements: **WASD** or **Arrow keys** or **Swipe**  

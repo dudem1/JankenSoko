@@ -108,7 +108,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[node name="Level06" type="Node2D"]
+[node name="Level03" type="Node2D"]
 script = ExtResource( 2 )
 
 [node name="Contain" type="Node2D" parent="."]

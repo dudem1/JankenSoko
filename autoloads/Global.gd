@@ -12,7 +12,7 @@ var speed = 7
 const LEVEL_TROPHY_REQUIREMENTS = {
 	"Level01": {"gold": 33, "silver": 35},
 	"Level02": {"gold": 13, "silver": 17},
-	"Level03": {"gold": 43, "silver": 47},
+	"Level03": {"gold": 29, "silver": 43},
 	"Level04": {"gold": 24, "silver": 25},
 	"Level05": {"gold": 28, "silver": 32},
 	"Level06": {"gold": 102, "silver": 108},

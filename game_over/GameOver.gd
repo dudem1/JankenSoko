@@ -22,7 +22,6 @@ onready var steps_taken_value_label = $GameStats/StepsTakenHBoxContainer/StepsTa
 onready var animation_player = $AnimationPlayer
 
 var count_steps = 0
-var can_continue = false
 
 func _ready():
 	Global.timer_running = false
@@ -50,18 +49,17 @@ func _ready():
 	time_played_value_label.text = Global.get_time_formatted()
 	steps_taken_value_label.text = str(count_steps)
 
-func _on_AnimationPlayer_animation_finished(_anim_name):
-	if can_continue:
-		get_tree().change_scene("res://levels/level00.tscn")
-		Global.timer_running = true
-	else:
-		can_continue = true
+func _on_AnimationPlayer_animation_finished(anim_name):
+	if anim_name != "fade_out": return
+
+	get_tree().change_scene("res://levels/Level00.tscn")
+	Global.timer_running = true
 	
 func _input(event):
 	if animation_player.is_playing(): return
 
 	if event is InputEventMouseButton and event.pressed:
-		animation_player.play_backwards("fade_in")
+		animation_player.play("fade_out")
 
 	if event is InputEventKey and event.pressed:
-		animation_player.play_backwards("fade_in")
+		animation_player.play("fade_out")

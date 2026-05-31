@@ -159,6 +159,22 @@ func _on_ControlsButton_toggled(button_pressed):
 	else:
 		controls_panel_animation_player.play_backwards("show")
 
+func _input(event):
+	if controls_button.pressed and _is_controls_panel_close_event(event):
+		controls_button.pressed = false
+
+func _is_controls_panel_close_event(event):
+	if event is InputEventKey:
+		return event.pressed and !event.echo
+
+	if event is InputEventMouseButton:
+		return event.pressed
+
+	if event is InputEventScreenTouch:
+		return event.pressed
+
+	return false
+
 func _on_Restart_pressed():
 	if !player.can_move: return
 	
